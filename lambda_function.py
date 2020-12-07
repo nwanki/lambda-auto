@@ -10,7 +10,7 @@ clusterid = os.environ['cluster_identifier']
 def lambda_handler(event, context):
     snapshot_deleted = redshift_snapshot_remover()
     snapshot_success = redshift_manual_snap()
-    print("TEST")
+    print("TEST123")
     if snapshot_deleted and snapshot_success:
         return "Completed"
     else:
