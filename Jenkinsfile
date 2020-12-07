@@ -10,7 +10,7 @@ node {
     stage('Clonning the Repo'){
         sh 'date'
         echo STACK_NAME
-        git master: 'main', credentialsId: 'github_neba', url: ''
+        git master: 'main', credentialsId: 'github_neba', url: 'https://github.com/nwanki/lambda-auto.git'
     }
 
     stage('updating parameters'){
