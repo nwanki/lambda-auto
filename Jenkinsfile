@@ -2,7 +2,8 @@ def AWS_PATH = "/usr/bin/aws"
 def TEMPLATEFILE="create_lambda_cft.templates"
 def PARMFILE="create_lambda_cft.parameters"
 def STACK_NAME_REF = JOB_NAME.replace('/', '-')
-def STACK_NAME="${STACK_NAME_REF}-${ENV}"
+def STACK_NAME_REF_1 = STACK_NAME_REF.replace('_', '-')
+def STACK_NAME="${STACK_NAME_REF_1}-${ENV}"
 def ZIP_FILE_NAME="${BUILD_TAG}"
 def check_stack
 def create_stack
