@@ -21,11 +21,11 @@ Resources:
     Type: AWS::Lambda::Function
     Properties: 
       Handler: lambda_function.lambda_handler
-      Role: arn:aws:iam::854999902044:role/service-role/neba-role-iqd58bfl
+      Role: !Ref ROLE
       Code: 
-        S3Bucket: lambda-code-neba
-        S3Key: my-deployment-package.zip
-      Runtime: python3.8
-      Timeout: 300
+        S3Bucket: !Ref S3BUCKETNAME
+        S3Key: !Ref CODEZIP
+      Runtime: !Ref RUNTIME
+      Timeout: !Ref TIMEOUT
       TracingConfig:
         Mode: Active
