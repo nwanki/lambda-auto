@@ -1,5 +1,21 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Lambda Deployment
+Parameters:
+  ROLE:
+    Type: String 
+    Description: Enter IAM Role ARN
+  S3BUCKETNAME:
+    Type: String 
+    Description: Enter S3 BUCKET NAME 
+  CODEZIP:
+    Type: String 
+    Description: Enter CODE ZIP
+  RUNTIME:
+    Type: String 
+    Description: Enter executable Python3.8
+  TIMEOUT:
+    Type: String 
+    Description: Enter Time out in sec
 Resources:
   Function: 
     Type: AWS::Lambda::Function
