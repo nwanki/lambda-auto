@@ -1,0 +1,22 @@
+[
+  {
+    "ParameterKey": "ROLE",
+    "ParameterValue": "ROLE_SELECT"
+  }, 
+  {
+    "ParameterKey": "S3BUCKETNAME",
+    "ParameterValue": "S3_BUCKET_NAME_SELECT"
+  },
+  {
+    "ParameterKey": "CODEZIP",
+    "ParameterValue": "CODE_ZIP_SELECT"
+  },
+  {
+    "ParameterKey": "RUNTIME",
+    "ParameterValue": "RUNTIME_SELECT"
+  },
+  {
+    "ParameterKey": "TIMEOUT",
+    "ParameterValue": "TIME_OUT_SELECT"
+  }
+]
