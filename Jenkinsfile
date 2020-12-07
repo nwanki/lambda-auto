@@ -3,8 +3,13 @@ def TEMPLATEFILE="create_lambda_cft.templates"
 def PARMFILE="create_lambda_cft.parameters"
 def STACK_NAME_REF = JOB_NAME.replace('/', '-')
 def STACK_NAME="${STACK_NAME_REF}-${ENV}"
+def ZIP_FILE_NAME="${BUILD_TAG}"
 def check_stack
 def create_stack
+def ROLE_ARN="${ROLE_ARN}"
+def S3_BUCKET_NAME="${S3_BUCKET_NAME}"
+def EXECUTABLE="${EXECUTABLE}"
+def LAMBDA_TIMEOUT="${LAMBDA_TIMEOUT}"
 
 node {
     stage('Clonning the Repo'){
@@ -14,9 +19,20 @@ node {
     }
 
     stage('updating parameters'){
-        sh "ls -ltr "
+        sh "sed -i 's+ROLE_SELECT+${ROLE_ARN}+g' ${PARMFILE}"
+        sh "sed -i 's+S3_BUCKET_NAME_SELECT+${S3_BUCKET_NAME}+g' ${PARMFILE}"
+        sh "sed -i 's+CODE_ZIP_SELECT+${ZIP_FILE_NAME}.zip+g' ${PARMFILE}"
+        sh "sed -i 's+RUNTIME_SELECT+${EXECUTABLE}+g' ${PARMFILE}"
+        sh "sed -i 's+TIME_OUT_SELECT+${LAMBDA_TIMEOUT}+g' ${PARMFILE}"
     }
-   
+    
+    stage('Creating Code ZIP file'){
+        sh "zip -g ${ZIP_FILE_NAME}.zip lambda_function.py"
+    }
+    stage('Uploading ZIP file to S3 Bucket'){
+        sh "${AWS_PATH} s3 cp ${ZIP_FILE_NAME}.zip s3://${S3_BUCKET_NAME}/${ZIP_FILE_NAME}.zip"
+    }
+    
     stage('Checking if Stack was Created') {
         check_stack = sh (
                 script: "${AWS_PATH} cloudformation describe-stacks --profile default --stack-name ${STACK_NAME} --query 'Stacks[].StackStatus[]' --output text",
