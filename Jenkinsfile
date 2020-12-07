@@ -1,36 +1,6 @@
 def AWS_PATH = "/usr/bin/aws"
-
-properties([
-    parameters([
-        string(
-            name: 'ENV',
-            defaultValue: 'dev',
-            description: 'Enter Environment'
-        ),
-        string(
-            name: 'AZ',
-            defaultValue: '2a',
-            description: 'Enter AZ e.g. 2a/2b/2c'
-        ),
-        string(
-            name: 'Monitoring',
-            defaultValue: 'true',
-            description: 'Enable Monitoring'
-        ),
-        string(
-            name: 'EIP',
-            defaultValue: '',
-            description: 'Enter EIP'
-        )
-    ])
-])
-
-def TEMPLATEFILE="cleo-cicd/create_cleo_instance.templates"
-def ENV="${ENV}"
-def AZ="${AZ}"
-def Monitoring="${Monitoring}"
-def EIP="${EIP}"
-def PARMFILE="cleo-cicd/${ENV}.parameters"
+def TEMPLATEFILE="create_lambda_cft.templates"
+def PARMFILE="create_lambda_cft.parameters"
 def STACK_NAME_REF = JOB_NAME.replace('/', '-')
 def STACK_NAME="${STACK_NAME_REF}-${ENV}"
 def check_stack
@@ -40,14 +10,11 @@ node {
     stage('Clonning the Repo'){
         sh 'date'
         echo STACK_NAME
-        git master: 'master', credentialsId: 'gitlab_user_password', url: 'https://gitlab.com/clement_ayuk/CLEO.git'
+        git master: 'main', credentialsId: 'github_neba', url: ''
     }
 
     stage('updating parameters'){
-        sh "sed -i 's+AZ_SELECT+${AZ}+g' ${PARMFILE}"
-        sh "sed -i 's+Monitoring_SELECT+${Monitoring}+g' ${PARMFILE}"
-        sh "sed -i 's+ENV_SELECT+${ENV}+g' ${PARMFILE}"
-        sh "sed -i 's+EIP_SELECT+${EIP}+g' ${PARMFILE}"
+        sh "ls -ltr "
     }
    
     stage('Checking if Stack was Created') {
