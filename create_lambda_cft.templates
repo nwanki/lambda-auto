@@ -25,6 +25,12 @@ Resources:
       Code: 
         S3Bucket: !Ref S3BUCKETNAME
         S3Key: !Ref CODEZIP
+      Environment:
+        Variables:
+          cluster_identifier: edra-clust-impl01
+          max_back: 122
+          ret_period: 120
+          sns_topic: arn:aws:sns:us-east-1:848393596071:edra-impl-notify-noncritical
       Runtime: !Ref RUNTIME
       Timeout: !Ref TIMEOUT
       TracingConfig:
