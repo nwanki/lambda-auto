@@ -36,7 +36,7 @@ Resources:
         Statement:
           - Effect: "Allow"
             Action:
-            - 's3:ObjectCreated:*'
+            - 's3:PutBucketNotification'
             Resource: !Sub "arn:aws:s3:::${S3WAHTCHBUCKETNAME}"
             Principal:
               AWS: !Ref ROLE
