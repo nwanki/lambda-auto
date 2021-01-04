@@ -8,6 +8,7 @@ def ZIP_FILE_NAME="${BUILD_TAG}"
 def check_stack
 def create_stack
 def ROLE_ARN="${ROLE_ARN}"
+def S3_WAHTCH_BUCKET_NAME="${S3_WAHTCH_BUCKET_NAME}"
 def S3_BUCKET_NAME="${S3_BUCKET_NAME}"
 def EXECUTABLE="${EXECUTABLE}"
 def LAMBDA_TIMEOUT="${LAMBDA_TIMEOUT}"
@@ -21,6 +22,7 @@ node {
 
     stage('updating parameters'){
         sh "sed -i 's+ROLE_SELECT+${ROLE_ARN}+g' ${PARMFILE}"
+        sh "sed -i 's+S3_WAHTCH_BUCKET_NAME+${S3_WAHTCH_BUCKET_NAME}+g' ${PARMFILE}"
         sh "sed -i 's+S3_BUCKET_NAME_SELECT+${S3_BUCKET_NAME}+g' ${PARMFILE}"
         sh "sed -i 's+CODE_ZIP_SELECT+${ZIP_FILE_NAME}.zip+g' ${PARMFILE}"
         sh "sed -i 's+RUNTIME_SELECT+${EXECUTABLE}+g' ${PARMFILE}"
