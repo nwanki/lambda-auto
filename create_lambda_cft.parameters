@@ -2,7 +2,11 @@
   {
     "ParameterKey": "ROLE",
     "ParameterValue": "ROLE_SELECT"
-  }, 
+  },
+  {
+    "ParameterKey": "S3WAHTCHBUCKETNAME",
+    "ParameterValue": "S3_WAHTCH_BUCKET_NAME"
+  },
   {
     "ParameterKey": "S3BUCKETNAME",
     "ParameterValue": "S3_BUCKET_NAME_SELECT"
