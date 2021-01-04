@@ -20,31 +20,10 @@ Parameters:
     Type: String 
     Description: Enter Time out in sec
 Resources:
-  BucketPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: 'lambda:InvokeFunction'
-      FunctionName: !Ref Function
-      Principal: s3.amazonaws.com
-      SourceAccount: !Ref "AWS::AccountId"
-      SourceArn: !Sub "arn:aws:s3:::${S3WAHTCHBUCKETNAME}"
-  NotificationBucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket: !Ref S3WAHTCHBUCKETNAME
-      PolicyDocument:
-        Statement:
-          - Effect: "Allow"
-            Action:
-            - 's3:PutBucketNotification'
-            Resource: !Sub "arn:aws:s3:::${S3WAHTCHBUCKETNAME}"
-            Principal:
-              AWS: !Ref ROLE
   BucketConfiguration:
     Type: Custom::S3BucketConfiguration
     DependsOn:
-    - BucketPermission
-    - NotificationBucketPolicy
+    - Function
     Properties:
       ServiceToken: !GetAtt Function.Arn
       Bucket: !Ref S3WAHTCHBUCKETNAME
