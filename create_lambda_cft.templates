@@ -39,7 +39,7 @@ Resources:
             - 's3:ObjectCreated:*'
             Resource: !Sub "arn:aws:s3:::${S3WAHTCHBUCKETNAME}"
             Principal:
-              AWS: !GetAtt ROLE.Arn
+              AWS: !Ref ROLE
   BucketConfiguration:
     Type: Custom::S3BucketConfiguration
     DependsOn:
