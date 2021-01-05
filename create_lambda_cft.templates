@@ -20,20 +20,6 @@ Parameters:
     Type: String 
     Description: Enter Time out in sec
 Resources:
-  ObjectTrigger:
-    Type: AWS::S3::Bucket
-    DependsOn: Function
-    Properties:
-      BucketName: !Ref S3WAHTCHBUCKETNAME
-      NotificationConfiguration:
-        LambdaConfigurations:
-        - Event: 's3:ObjectCreated:*'
-          Filter:
-            S3Key:
-              Rules:
-                - Name: prefix
-                  Value: edra_monthly_snapshot_trigger
-          Function: !GetAtt Function.Arn
   Function: 
     Type: AWS::Lambda::Function
     Properties: 
