@@ -7,9 +7,6 @@ Parameters:
   S3BUCKETNAME:
     Type: String 
     Description: Enter S3 BUCKET NAME
-  S3WAHTCHBUCKETNAME:
-    Type: String 
-    Description: Enter S3 OBJECT WATCH BUCKET NAME
   CODEZIP:
     Type: String 
     Description: Enter CODE ZIP
